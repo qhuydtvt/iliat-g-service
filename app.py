@@ -1,62 +1,46 @@
-"""
-Flask Documentation:     http://flask.pocoo.org/docs/
-Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
-Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
+from flask import Flask
 
-This file creates your application.
-"""
+from questions import Question, QuestionCollection
+from versions import Version
+from question_packs import QuestionPack, QuestionPackCollection
+import mongoengine
 
-import os
-from flask import Flask, render_template, request, redirect, url_for
+
+host = "ds011840.mlab.com"
+port = 11840
+db_name = "gmat"
+user_name = "admin"
+password = "admin"
+
+mongoengine.connect(db_name, host=host, port=port, username=user_name, password=password)
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
-
-
-###
-# Routing for your application.
-###
+def remove_dollar_sign(s):
+    OLD_OID = "$oid"
+    NEW_OID = "oid"
+    return s.replace(OLD_OID, NEW_OID)
 
 @app.route('/')
-def home():
-    """Render website's home page."""
-    return render_template('home.html')
+def hello_world():
+    return "Iliat GMATers, don't panic!"
 
 
-@app.route('/about/')
-def about():
-    """Render the website's about page."""
-    return render_template('about.html')
+@app.route('/api/question_collection')
+@app.route('/api/questions')
+def get_gmat_question_collection():
+    questions = Question.objects
+    version = Version.objects[0]
+    question_collection = QuestionCollection(version=version.value, questions=questions)
+    return remove_dollar_sign(str(question_collection.to_json()))
 
-
-###
-# The functions below should be applicable to all Flask apps.
-###
-
-@app.route('/<file_name>.txt')
-def send_text_file(file_name):
-    """Send your static text file."""
-    file_dot_text = file_name + '.txt'
-    return app.send_static_file(file_dot_text)
-
-
-@app.after_request
-def add_header(response):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    response.headers['Cache-Control'] = 'public, max-age=600'
-    return response
-
-
-@app.errorhandler(404)
-def page_not_found(error):
-    """Custom 404 page."""
-    return render_template('404.html'), 404
-
+@app.route('/api/question_pack_collection')
+@app.route('/api/question_packs')
+def get_gmat_question_pack_collection():
+    question_packs = QuestionPack.objects
+    question_pack_collection = QuestionPackCollection(question_packs = question_packs)
+    return remove_dollar_sign(str(question_pack_collection.to_json()))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=6969)
+
