@@ -32,3 +32,11 @@ pip-log.txt
 *.[oa]
 *.py[co]
 *.rbc
+.idea/.name
+.idea/encodings.xml
+.idea/iliat-g-service.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
