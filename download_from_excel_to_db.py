@@ -142,7 +142,7 @@ def load_data_from_excel(excel_path):
             return None
         stem = sheet.cell(row_index, STEM_COL).value
         answer_choices = []
-        for r_idx in range(row_index, row_index + QUESTION_ROW_STEP - 1):
+        for r_idx in range(row_index, row_index + QUESTION_ROW_STEP):
             ans_choice = sheet.cell(r_idx, ANSWERS_COL).value
             explanation = sheet.cell(r_idx, EXPLANATION_COL).value
             note = sheet.cell(r_idx, NOTE_COL).value
@@ -238,7 +238,7 @@ def load_objects_from_excel(excel_path):
         stem = sheet.cell(row_index, STEM_COL).value
         answer_choices = []
         ans_idx = 0
-        for r_idx in range(row_index, row_index + QUESTION_ROW_STEP - 1):
+        for r_idx in range(row_index, row_index + QUESTION_ROW_STEP):
             ans_choice = str(sheet.cell(r_idx, ANSWERS_COL).value).strip()
             # print(re.sub("^[a-eA-E].", "", ans_choice).strip())
             explanation = sheet.cell(r_idx, EXPLANATION_COL).value
@@ -320,19 +320,11 @@ if __name__ == "__main__":
     db = mongoengine.connect(db_name,
         host=host, port=port, username=user_name, password=password)
 
-    # print(load_data_from_excel("SC 1 - 10 - Commented.xlsx"))
-    # i = 0
-    # for data in load_data_from_excel("SC 1 - 10 - Commented.xlsx"):
-    #     if i == 5:
-    #         print("stimulus", data['stimulus'])
-    #         print("stem", data['stem'])
-    #         for ans in data['answer_choices']:
-    #             print("------------------------------------------------------------")
-    #             print(ans['choice'])
-    #             print(ans['explanation'])
-    #             print(ans['note'])
-    #     i += 1
-    # pass
+
+    # load_questions_for_pack1()
     load_questions_for_pack1()
     load_question_pack1()
+
+    # for data in load_objects_from_excel("SC 1 - 10 - Commented.xlsx"):
+    #     print(data.to_json())
     db.close()
