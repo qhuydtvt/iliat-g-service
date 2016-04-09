@@ -208,6 +208,7 @@ def load_objects_from_excel(excel_path):
     TYPE_COL = 7
     SUB_TYPE_COL = 8
 
+
     wb = xlrd.open_workbook(excel_path)
 
     sheet = wb.sheet_by_index(INFO_SHEET_IDX)
@@ -303,7 +304,7 @@ def load_objects_from_excel(excel_path):
 # db.close()
 
 def load_questions_for_pack1():
-    for data in load_objects_from_excel("SC 1 - 10 - Commented.xlsx"):
+    for data in load_objects_from_excel("SC 1 - 10 - Commented.xls"):
         data.save()
 
 def load_question_pack1():
@@ -321,10 +322,11 @@ if __name__ == "__main__":
         host=host, port=port, username=user_name, password=password)
 
 
-    # load_questions_for_pack1()
     load_questions_for_pack1()
     load_question_pack1()
 
-    # for data in load_objects_from_excel("SC 1 - 10 - Commented.xlsx"):
-    #     print(data.to_json())
+    # objs = load_objects_from_excel("SC 1 - 10 - Commented.xls")
+    # print(objs[0].to_json())
+
+
     db.close()

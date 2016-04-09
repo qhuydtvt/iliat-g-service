@@ -30,8 +30,7 @@ def hello_world():
 @app.route('/api/questions')
 def get_gmat_question_collection():
     questions = Question.objects
-    version = Version.objects[0]
-    question_collection = QuestionCollection(version=version.value, questions=questions)
+    question_collection = QuestionCollection(questions=questions)
     return remove_dollar_sign(str(question_collection.to_json()))
 
 @app.route('/api/question_pack_collection')
@@ -40,6 +39,11 @@ def get_gmat_question_pack_collection():
     question_packs = QuestionPack.objects
     question_pack_collection = QuestionPackCollection(question_packs = question_packs)
     return remove_dollar_sign(str(question_pack_collection.to_json()))
+
+@app.route('/api/version')
+def get_gmat_version():
+    version = Version.objects[0];
+    return remove_dollar_sign(str(version.to_json()))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6969)

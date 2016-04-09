@@ -8,6 +8,5 @@ class QuestionPack(Document):
     question_ids = ListField(StringField())
 
 class QuestionPackCollection(Document):
-    version = EmbeddedDocumentField('Version')
     question_packs = ListField(EmbeddedDocumentField('QuestionPack'))
 
