@@ -3,6 +3,9 @@ from flask import Flask
 from questions import Question, QuestionCollection
 from versions import Version
 from question_packs import QuestionPack, QuestionPackCollection
+from users import User
+import json
+from flask import request
 import mongoengine
 
 
@@ -24,6 +27,15 @@ def remove_dollar_sign(s):
 @app.route('/')
 def hello_world():
     return "Iliat GMATers, don't panic!"
+@app.route('/api/login', methods=['POST'])
+def gmat_login():
+    user_name = request.form['username'];
+    password = request.form['password'];
+    for user in User.objects(user_name=user_name):
+        if(user.password == password):
+            return json.dumps({"login_status":1, "login_message":"Login Success"})
+    return json.dumps({"ligin_status":0, "login_message":"Login Faild"})
+
 
 
 @app.route('/api/question_collection')
@@ -46,5 +58,5 @@ def get_gmat_version():
     return remove_dollar_sign(str(version.to_json()))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=6969)
+    app.run(host='0.0.0.0', port=9696)
 

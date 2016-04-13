@@ -1,6 +1,6 @@
 __author__ = 'qhuydtvt'
 
-from mongoengine import *
+from mongoengine import Document, StringField, EmbeddedDocumentField, ListField, IntField
 from answer_choices import AnswerChoice
 
 class Question(Document):

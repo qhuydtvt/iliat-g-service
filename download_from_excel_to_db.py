@@ -10,14 +10,11 @@ from app import remove_dollar_sign
 from answer_choices import AnswerChoice
 import re
 
+from mlab import *
+
 
 import xlrd
 
-host = "ds011840.mlab.com"
-port = 11840
-db_name = "gmat"
-user_name = "admin"
-password = "admin"
 
 #from questions import Question, QuestionCollection
 #import mongoengine
