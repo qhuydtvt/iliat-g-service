@@ -34,7 +34,7 @@ def gmat_login():
     for user in User.objects(user_name=user_name):
         if(user.password == password):
             return json.dumps({"login_status":1, "login_message":"Login Success"})
-    return json.dumps({"ligin_status":0, "login_message":"Login Faild"})
+    return json.dumps({"login_status":0, "login_message":"Login Faild"})
 
 
 
