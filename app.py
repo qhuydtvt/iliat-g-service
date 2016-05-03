@@ -46,7 +46,7 @@ def get_question():
         question = questions.get(id=ObjectId(id))
         questions_reponse.append(question)
     question_collection = QuestionCollection(questions = questions_reponse)
-    return question_collection.to_json()
+    return remove_dollar_sign(str(question_collection.to_json()))
 
 
 @app.route('/api/question_collection')
