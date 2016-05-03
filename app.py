@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Flask
 
 from questions import Question, QuestionCollection
@@ -36,6 +37,16 @@ def gmat_login():
             return json.dumps({"login_status":1, "login_message":"Login Success"})
     return json.dumps({"login_status":0, "login_message":"Login Faild"})
 
+@app.route('/api/question', methods=['POST'])
+def get_question():
+    list_id_question = request.form.getlist('question_id')
+    questions_reponse = []
+    questions = Question.objects
+    for id in list_id_question:
+        question = questions.get(id=ObjectId(id))
+        questions_reponse.append(question)
+    question_collection = QuestionCollection(questions = questions_reponse)
+    return question_collection.to_json()
 
 
 @app.route('/api/question_collection')

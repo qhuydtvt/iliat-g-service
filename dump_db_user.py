@@ -10,7 +10,7 @@ if __name__ == "__main__":
                              host=host, port=port, username=user_name, password=password)
 
 
-    # user = User(user_name="admin22", password="123456")
+    # user = User(user_name="admin@techkids.edu.vn", password="123456")
     # user.save()
 
     users = User.objects

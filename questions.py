@@ -1,9 +1,12 @@
+from bson import ObjectId
+
 __author__ = 'qhuydtvt'
 
 from mongoengine import Document, StringField, EmbeddedDocumentField, ListField, IntField
 from answer_choices import AnswerChoice
 
 class Question(Document):
+    _id = ObjectId()
     type = StringField()
     sub_type = StringField()
     stimulus = StringField()
