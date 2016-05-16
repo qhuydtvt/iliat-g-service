@@ -307,7 +307,7 @@ def load_questions_for_pack1():
 def load_question_pack1():
     questions = Question.objects
     q_p = QuestionPack(
-        available_time="2016-03-26",
+        available_time="2016-05-04",
         question_ids=[str(question.id) for question in questions]
     )
     q_p.save()

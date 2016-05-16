@@ -37,6 +37,13 @@ def gmat_login():
             return json.dumps({"login_status":1, "login_message":"Login Success"})
     return json.dumps({"login_status":0, "login_message":"Login Faild"})
 
+@app.route('/api/question_type')
+def get_gmat_question_type():
+    return json.dumps({"type":[{"code" : "SC", "detail":"Sentence Correction"}
+                          ,{"code" : "CR", "detail":"Critical Reasoning"}
+                          ,{"code" : "RC", "detail":"Reading Comprehension"}
+                          ,{"code" : "Q", "detail":"Quantiative"}]});
+
 @app.route('/api/question', methods=['POST'])
 def get_question():
     list_id_question = request.form.getlist('question_id')
