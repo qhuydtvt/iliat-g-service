@@ -69,7 +69,7 @@ def get_login_techkids():
     password = request.args.get('password')
     for user in User.objects(user_name=username):
         if (user.password == password):
-            return json.dumps({"login_status": 1, "login_message": "Login Success", "link":"http://download.a2.nixcdn.com/259249c1b5ac4fb5824e066758b0eaa6/57416c48/NhacCuaTui133/QuocCa-HoaTau_xcj4.mp3"})
+            return json.dumps({"login_status": 1, "login_message": "Login Success", "link":"http://iliat.org/download.txt"})
     return json.dumps({"login_status": 0, "login_message": "Login Faild"})
 
 
