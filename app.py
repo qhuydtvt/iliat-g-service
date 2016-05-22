@@ -63,6 +63,16 @@ def get_gmat_question_collection():
     question_collection = QuestionCollection(questions=questions)
     return remove_dollar_sign(str(question_collection.to_json()))
 
+@app.route('/api/techkids/login')
+def get_login_techkids():
+    username = request.args.get('username')
+    password = request.args.get('password')
+    for user in User.objects(user_name=username):
+        if (user.password == password):
+            return json.dumps({"login_status": 1, "login_message": "Login Success"})
+    return json.dumps({"login_status": 0, "login_message": "Login Faild"})
+
+
 @app.route('/api/question_pack_collection')
 @app.route('/api/question_packs')
 def get_gmat_question_pack_collection():
@@ -72,7 +82,7 @@ def get_gmat_question_pack_collection():
 
 @app.route('/api/version')
 def get_gmat_version():
-    version = Version.objects[0];
+    version = Version.objects[0]
     return remove_dollar_sign(str(version.to_json()))
 
 if __name__ == '__main__':

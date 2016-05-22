@@ -70,7 +70,7 @@ def test():
     INFO_SHEET_IDX = 0
     QUESTION_STEP = 5
 
-    wb = xlrd.open_workbook("SC 1 - 10 - Commented.xlsx")
+    wb = xlrd.open_workbook("SC 1 - 10.xlsx")
 
     sheet = wb.sheet_by_index(INFO_SHEET_IDX)
 
@@ -301,13 +301,13 @@ def load_objects_from_excel(excel_path):
 # db.close()
 
 def load_questions_for_pack1():
-    for data in load_objects_from_excel("SC 1 - 10 - Commented.xls"):
+    for data in load_objects_from_excel("SC 1 - 10.xls"):
         data.save()
 
 def load_question_pack1():
     questions = Question.objects
     q_p = QuestionPack(
-        available_time="2016-05-04",
+        available_time="2016-09-06",
         question_ids=[str(question.id) for question in questions]
     )
     q_p.save()
