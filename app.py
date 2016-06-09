@@ -42,11 +42,24 @@ def get_gmat_question_type():
     return json.dumps({"type":
                            [
                                {"code" : "SC",
-                                "detail":"Sentence Correction"},
+                                "detail":"Sentence Correction",
+                                "sub_types": [
+                                    {"code": "MISC",
+                                     "detail": "Miscellaneous"}
+                                ]},
                                {"code" : "CR",
-                                 "detail":"Critical Reasoning"},
+                                 "detail":"Critical Reasoning",
+                                "sub_types": [
+                                    {"code": "MISC",
+                                     "detail": "Miscellaneous"}
+                                ]
+                                },
                                {"code" : "RC",
-                                "detail":"Reading Comprehension"},
+                                "detail":"Reading Comprehension",
+                                "sub_types": [
+                                    {"code": "MISC",
+                                     "detail": "Miscellaneous"}
+                                ]},
                                {"code" : "Q",
                                 "detail":"Quantitative",
                                 "sub_types": [
