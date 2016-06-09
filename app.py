@@ -10,11 +10,7 @@ from flask import request
 import mongoengine
 
 
-host = "ds011840.mlab.com"
-port = 11840
-db_name = "gmat"
-user_name = "admin"
-password = "admin"
+from mlab import  *
 
 mongoengine.connect(db_name, host=host, port=port, username=user_name, password=password)
 
@@ -35,7 +31,7 @@ def gmat_login():
     for user in User.objects(user_name=user_name):
         if(user.password == password):
             return json.dumps({"login_status":1, "login_message":"Login Success"})
-    return json.dumps({"login_status":0, "login_message":"Login Faild"})
+    return json.dumps({"login_status":0, "login_message":"Login Failed"})
 
 @app.route('/api/question_type')
 def get_gmat_question_type():
@@ -57,6 +53,18 @@ def get_gmat_question_type():
                                {"code" : "RC",
                                 "detail":"Reading Comprehension",
                                 "sub_types": [
+                                    {"code": "MI",
+                                     "detail": "Main Idea"},
+                                    {"code": "D",
+                                     "detail": "Detail"},
+                                    {"code": "INF",
+                                     "detail": "Inference"},
+                                    {"code": "OOC",
+                                     "detail": "Out of context"},
+                                    {"code": "LS",
+                                     "detail": "Logical structure"},
+                                    {"code": "AT",
+                                     "detail": "Author's tone"},
                                     {"code": "MISC",
                                      "detail": "Miscellaneous"}
                                 ]},
@@ -70,7 +78,9 @@ def get_gmat_question_type():
                                     {"code": "GEO",
                                      "detail": "Geometry"},
                                     {"code": "WP",
-                                     "detail": "World Problems"}
+                                     "detail": "World Problems"},
+                                    {"code": "MISC",
+                                     "detail": "Miscellaneous"}
                                 ]}
                            ]});
 
@@ -100,7 +110,7 @@ def get_login_techkids():
     for user in User.objects(user_name=username):
         if (user.password == password):
             return json.dumps({"login_status": 1, "login_message": "Login Success", "link":"http://iliat.org/download.txt"})
-    return json.dumps({"login_status": 0, "login_message": "Login Faild"})
+    return json.dumps({"login_status": 0, "login_message": "Login Failed"})
 
 
 @app.route('/api/question_pack_collection')
