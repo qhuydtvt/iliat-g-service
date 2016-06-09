@@ -46,6 +46,20 @@ def get_gmat_question_type():
                                {"code" : "CR",
                                  "detail":"Critical Reasoning",
                                 "sub_types": [
+                                    {"code": "MBT",
+                                     "detail": "Must be true"},
+                                    {"code": "W",
+                                     "detail": "Weaken"},
+                                    {"code": "S",
+                                     "detail": "Strengthen"},
+                                    {"code": "E",
+                                     "detail": "Evaluate"},
+                                    {"code": "A",
+                                     "detail": "Assumption"},
+                                    {"code": "RTP",
+                                     "detail": "Resolve the paradox"},
+                                    {"code": "BF",
+                                     "detail": "Bold face"},
                                     {"code": "MISC",
                                      "detail": "Miscellaneous"}
                                 ]
