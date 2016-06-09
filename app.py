@@ -63,11 +63,11 @@ def get_gmat_question_type():
                                {"code" : "Q",
                                 "detail":"Quantitative",
                                 "sub_types": [
-                                    {"code": "Arth",
+                                    {"code": "ARTH",
                                      "detail": "Arithmetic"},
-                                    {"code": "Alg",
+                                    {"code": "ALG",
                                      "detail": "Algebra"},
-                                    {"code": "Geo",
+                                    {"code": "GEO",
                                      "detail": "Geometry"},
                                     {"code": "WP",
                                      "detail": "World Problems"}
