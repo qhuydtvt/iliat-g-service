@@ -13,7 +13,6 @@ class Question(Document):
     stem = StringField()
     answer_choices = ListField(EmbeddedDocumentField('AnswerChoice'))
     right_answer = IntField()
-    level = IntField()
 
     @classmethod
     def to_formatted_json(cls, question_list):
