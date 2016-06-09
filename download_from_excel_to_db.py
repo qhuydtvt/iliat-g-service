@@ -300,6 +300,18 @@ def load_objects_from_excel(excel_path):
 
 # db.close()
 
+def upload_questions_and_question_pack(available_time, level):
+    questions = load_objects_from_excel("SC 1 - 10 - Commented.xlsx")
+    for question in questions:
+        # print(len(question.answer_choices))
+        question.save()
+    q_p = QuestionPack(
+        available_time=available_time,
+        question_ids=[str(question.id) for question in questions],
+        level = level
+    )
+    q_p.save()
+
 def load_questions_for_pack1():
     for data in load_objects_from_excel("SC 1 - 10.xls"):
         data.save()
@@ -318,9 +330,11 @@ if __name__ == "__main__":
     db = mongoengine.connect(db_name,
         host=host, port=port, username=user_name, password=password)
 
-
-    load_questions_for_pack1()
-    load_question_pack1()
+    upload_questions_and_question_pack("2016-06-04", 1)
+    upload_questions_and_question_pack("2016-06-05", 1)
+    upload_questions_and_question_pack("2016-07-01", 2)
+    upload_questions_and_question_pack("2016-08-21", 2)
+    upload_questions_and_question_pack("2016-09-12", 3)
 
     # objs = load_objects_from_excel("SC 1 - 10 - Commented.xls")
     # print(objs[0].to_json())

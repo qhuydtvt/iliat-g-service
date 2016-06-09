@@ -39,10 +39,27 @@ def gmat_login():
 
 @app.route('/api/question_type')
 def get_gmat_question_type():
-    return json.dumps({"type":[{"code" : "SC", "detail":"Sentence Correction"}
-                          ,{"code" : "CR", "detail":"Critical Reasoning"}
-                          ,{"code" : "RC", "detail":"Reading Comprehension"}
-                          ,{"code" : "Q", "detail":"Quantiative"}]});
+    return json.dumps({"type":
+                           [
+                               {"code" : "SC",
+                                "detail":"Sentence Correction"},
+                               {"code" : "CR",
+                                 "detail":"Critical Reasoning"},
+                               {"code" : "RC",
+                                "detail":"Reading Comprehension"},
+                               {"code" : "Q",
+                                "detail":"Quantitative",
+                                "sub_types": [
+                                    {"code": "Arth",
+                                     "detail": "Arithmetic"},
+                                    {"code": "Alg",
+                                     "detail": "Algebra"},
+                                    {"code": "Geo",
+                                     "detail": "Geometry"},
+                                    {"code": "WP",
+                                     "detail": "World Problems"}
+                                ]}
+                           ]});
 
 @app.route('/api/question', methods=['POST'])
 def get_question():
